@@ -45,7 +45,7 @@ Click the **Code** button on this repository and select **Create codespace**. A 
 
 ### Option B: Run Locally
 
-**Prerequisites:** Python 3.10+ and Node.js (v18+)
+**Prerequisites:** Python 3.10+ and Node.js (v20+)
 
 #### 1. Start the Backend (Terminal 1)
 ```bash
