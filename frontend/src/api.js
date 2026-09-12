@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:8000';
+const API_BASE = '/api';
 
 export async function simulateAttack(scenario) {
     const res = await fetch(`${API_BASE}/simulate/${scenario}`, {

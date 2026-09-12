@@ -16,8 +16,9 @@ export default function Dashboard({ onSelectIncident }) {
   useEffect(() => {
     loadData();
     
-    // Connect to WebSocket
-    const ws = new WebSocket('ws://localhost:8000/ws/dashboard');
+    // Connect to WebSocket using current host to work in Codespaces
+    const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const ws = new WebSocket(`${wsProtocol}//${window.location.host}/ws/dashboard`);
     
     ws.onmessage = (event) => {
       if (event.data === 'UPDATE') {
