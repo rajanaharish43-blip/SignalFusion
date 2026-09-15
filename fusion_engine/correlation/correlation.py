@@ -1,10 +1,10 @@
 import uuid
 from typing import List
 from datetime import datetime
-from models.alert import NormalizedEvent
-from models.incident import Incident
-from engine.risk import calculate_incident_score
-from engine.mitre import map_to_mitre
+from backend.models.alert import NormalizedEvent
+from backend.models.incident import Incident
+from fusion_engine.scoring.risk import calculate_incident_score
+from fusion_engine.rules.mitre import map_to_mitre
 
 def generate_ai_explanation(events: List[NormalizedEvent], risk_level: str) -> str:
     types = [e.event_type.replace('_', ' ').lower() for e in events]

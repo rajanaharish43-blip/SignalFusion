@@ -1,6 +1,6 @@
 from datetime import timedelta
 import uuid
-import models
+from backend.models import database_models as models
 
 def calculate_correlation_score(alert: models.Alert, incident: models.Incident) -> tuple[int, list[str]]:
     score = 0

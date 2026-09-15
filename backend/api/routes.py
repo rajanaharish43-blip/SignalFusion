@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
 from sqlalchemy.orm import Session
-import database
-import models
-import schemas
-import data_generator
-import normalizer
-import fusion
-import incident_engine
+from backend import database
+from backend.models import database_models as models
+from backend.models import schemas
+from backend.services import data_generator
+from backend.services import normalizer
+from backend.services import incident_engine
+from fusion_engine.correlation import fusion
 from typing import List
 import uuid
 import datetime

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, JSON
 from sqlalchemy.orm import relationship
-from database import Base
+from backend.database import Base
 import datetime
 
 class Incident(Base):

@@ -1,11 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from api.routes import router
-import database
-import models
+from backend.api.routes import router
+from backend import database
+from backend.models import database_models
 
 # Create all database tables
-models.Base.metadata.create_all(bind=database.engine)
+database_models.Base.metadata.create_all(bind=database.engine)
 
 app = FastAPI(title="SignalFusion API")
 
