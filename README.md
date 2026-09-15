@@ -43,17 +43,26 @@ You can run SignalFusion locally or instantly in the cloud via GitHub Codespaces
 ### Option A: Run in GitHub Codespaces
 Click the **Code** button on this repository and select **Create codespace**. A cloud environment will spin up with everything pre-installed!
 
-### Option B: Run Locally
+### Option B: Run with Docker Compose (Recommended)
+
+**Prerequisites:** Docker and Docker Compose
+
+Start the entire stack (PostgreSQL, Backend, Frontend) with a single command:
+```bash
+docker compose up -d --build
+```
+*The API will start on `http://localhost:8000` and the Dashboard will start on `http://localhost:5173`*
+
+### Option C: Run Locally (Without Docker)
 
 **Prerequisites:** Python 3.10+ and Node.js (v20+)
 
 #### 1. Start the Backend (Terminal 1)
 ```bash
-cd backend
 python -m venv venv
 source venv/Scripts/activate  # On Windows: .\venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload
+pip install -r backend/requirements.txt
+PYTHONPATH=. uvicorn backend.main:app --reload
 ```
 *The API will start on `http://localhost:8000`*
 
@@ -77,15 +86,14 @@ npm run dev
 If you have a live Wazuh environment, you can configure it to push alerts directly to SignalFusion. Follow the instructions in [docs/wazuh-setup.md](./docs/wazuh-setup.md).
 Alternatively, you can simulate a live Wazuh instance pushing webhooks by running:
 ```bash
-cd backend
-python wazuh_simulator.py
+PYTHONPATH=. python collectors/wazuh/wazuh_simulator.py
 ```
 
 ---
 
 ## 🛠️ Technology Stack
 - **Backend:** Python, FastAPI, SQLAlchemy
-- **Database:** SQLite (MVP) -> PostgreSQL (Production ready)
+- **Database:** PostgreSQL (with Docker) or SQLite (Local fallback)
 - **Frontend:** React, Vite, TailwindCSS, WebSockets
 - **Security:** Native Wazuh Integration
 
