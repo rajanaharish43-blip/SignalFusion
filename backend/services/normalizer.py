@@ -1,6 +1,6 @@
 from datetime import datetime
 from dateutil import parser
-import schemas
+from backend.models import schemas
 
 def normalize_event(event: dict) -> schemas.AlertCreate:
     source = event.get("source_type", "unknown")

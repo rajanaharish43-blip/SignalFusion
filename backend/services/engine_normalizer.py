@@ -1,6 +1,6 @@
 import uuid
 from typing import List, Dict, Any
-from models.alert import RawEvent, NormalizedEvent
+from backend.models.alert import RawEvent, NormalizedEvent
 
 def normalize_event(raw: RawEvent) -> NormalizedEvent:
     event_id = str(uuid.uuid4())

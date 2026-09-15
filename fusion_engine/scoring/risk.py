@@ -1,5 +1,5 @@
 from typing import List
-from models.alert import NormalizedEvent
+from backend.models.alert import NormalizedEvent
 
 # Base scores for different event types
 BASE_SCORES = {

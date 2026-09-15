@@ -1,5 +1,5 @@
 from typing import List
-from models.alert import NormalizedEvent
+from backend.models.alert import NormalizedEvent
 
 MITRE_MAPPING = {
     "POWERSHELL_EXECUTION": "T1059.001 - PowerShell",
