@@ -29,7 +29,7 @@ graph TD
     B --> C{Alert Normalizer}
     C --> D[Fusion Engine]
     D -->|Correlates IP, Time, User| E[Incident Engine]
-    E --> F[(SQLite / PostgreSQL)]
+    E --> F[(PostgreSQL Database)]
     F --> G[WebSocket API]
     G --> H[React SOC Dashboard]
 ```
@@ -38,32 +38,23 @@ graph TD
 
 ## 🚀 Getting Started
 
-You can run SignalFusion locally or instantly in the cloud via GitHub Codespaces!
+SignalFusion is fully Dockerized for a seamless setup experience. 
 
-### Option A: Run in GitHub Codespaces
-Click the **Code** button on this repository and select **Create codespace**. A cloud environment will spin up with everything pre-installed!
+### Prerequisites
+- [Docker](https://www.docker.com/products/docker-desktop) and Docker Compose installed.
 
-### Option B: Run Locally
+### Run with Docker (Recommended)
+You can launch the entire stack (PostgreSQL database, FastAPI backend, and React frontend) with a single command:
 
-**Prerequisites:** Python 3.10+ and Node.js (v20+)
-
-#### 1. Start the Backend (Terminal 1)
 ```bash
-cd backend
-python -m venv venv
-source venv/Scripts/activate  # On Windows: .\venv\Scripts\activate
-pip install -r requirements.txt
-uvicorn main:app --reload
+docker-compose up --build
 ```
-*The API will start on `http://localhost:8000`*
 
-#### 2. Start the Frontend (Terminal 2)
-```bash
-cd frontend
-npm install
-npm run dev
-```
-*The Dashboard will start on `http://localhost:5173`*
+- **Frontend Dashboard:** `http://localhost:5173`
+- **Backend API Docs:** `http://localhost:8000/docs`
+
+### Alternative: GitHub Codespaces
+Click the **Code** button on this repository and select **Create codespace**. A cloud environment will spin up with the required dependencies pre-installed!
 
 ---
 
@@ -77,15 +68,15 @@ npm run dev
 If you have a live Wazuh environment, you can configure it to push alerts directly to SignalFusion. Follow the instructions in [docs/wazuh-setup.md](./docs/wazuh-setup.md).
 Alternatively, you can simulate a live Wazuh instance pushing webhooks by running:
 ```bash
-cd backend
-python wazuh_simulator.py
+docker-compose exec backend python collectors/wazuh/wazuh_simulator.py
 ```
 
 ---
 
 ## 🛠️ Technology Stack
 - **Backend:** Python, FastAPI, SQLAlchemy
-- **Database:** SQLite (MVP) -> PostgreSQL (Production ready)
+- **Database:** PostgreSQL
 - **Frontend:** React, Vite, TailwindCSS, WebSockets
+- **Infrastructure:** Docker & Docker Compose
 - **Security:** Native Wazuh Integration
 
